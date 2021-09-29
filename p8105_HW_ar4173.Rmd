@@ -13,16 +13,39 @@ library(tidyverse)
 
 ```{r}
 sample_df =  tibble(
-  
+x=rnorm(10)
 )
 ```
 
-## Including Plots
+Problem 2
 
-You can also embed plots, for example:
+```{r penguins}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+data("penguins", package = "palmerpenguins")
+
+nrow(penguins)
+ncol(penguins)
 ```
+
+The data gives descriptions of 344 different penguins using 8 variables. Each observation is assigned a species, sex, and the island the penguin is from. Moreover, the continuous variables of the data set measures the bill length, bill depth, and flipper length(in millimeters). The year variable I presume is the year the penguin's data was taken/marked.
+
+
+```{r}
+mean(penguins$flipper_length_mm,na.rm=TRUE)
+```
+
+After reviewing the dataset, there are missing values, particularly for observations 343 and 344. To calculate the mean flipper length of the penguins in the sample, we ommitted those two observations. After ommission, the mean flipper length is 200.9152 millimeters. 
+
+
+```{r}
+ggplot(penguins, aes(x= bill_length_mm, y=flipper_length_mm, color=species)) + geom_point()
+```
+
+A scatter plot was created comparing the bill length to the flipper length, and the colors of the points denote what species each penguin observation is. The key is given to the right of the generated scatter plot. The scatter plot reveals a fairly linear relationship between bill length and flipper length.
+
+```{r echo=FALSE}
+ggsave("penguins.png",plot=last_plot())
+```
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
