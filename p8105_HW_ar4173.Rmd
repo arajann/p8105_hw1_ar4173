@@ -10,12 +10,41 @@ output: github_document
 library(tidyverse)
 ```
 
+Problem 1
 
 ```{r}
-sample_df =  tibble(
-x=rnorm(10)
+set.seed(23)
+
+race_df = tibble(
+  acceleration_kmh = rnorm(10),
+  positive_ac= c(TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE, TRUE, TRUE, TRUE),
+  names = c("Michael","Bodie","Mcnulty","Poot", "Avon","WeeBey", "Omar","Stringer","Marlo","Lestor"),
+  pace = factor(c("moderate","slow", "moderate", "fast", "moderate", "fast","slow","fast","moderate","fast"))
 )
+
+race_df
 ```
+
+```{r}
+
+mean(race_df$acceleration_kmh)
+
+mean(race_df$positive_ac)
+
+mean(race_df$names)
+
+mean(race_df$pace)
+```
+
+The mean could be taken of both the acceleration_kmh and postive_ac variables. However, for the character and factor vectors (names and pace), we were unable to take the mean.
+
+```{r eval=FALSE}
+
+as.numeric(positive_ac)
+```
+
+Using this function converts the True/False elements in the positive_ac vector into numbers 0 and 1( Zero for False, One for ). Thus it explains why we get a mean for the logical vector, even though the elements are not in fact numeric. 
+
 
 Problem 2
 
@@ -43,9 +72,6 @@ ggplot(penguins, aes(x= bill_length_mm, y=flipper_length_mm, color=species)) + g
 
 A scatter plot was created comparing the bill length to the flipper length, and the colors of the points denote what species each penguin observation is. The key is given to the right of the generated scatter plot. The scatter plot reveals a fairly linear relationship between bill length and flipper length.
 
-```{r echo=FALSE}
+```{r include==FALSE}
 ggsave("penguins.png",plot=last_plot())
 ```
-
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
