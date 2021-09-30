@@ -36,14 +36,16 @@ mean(race_df$names)
 mean(race_df$pace)
 ```
 
-The mean could be taken of both the acceleration_kmh and postive_ac variables. However, for the character and factor vectors (names and pace), we were unable to take the mean.
+The mean could be taken of both the acceleration_kmh and postive_ac variable. However, for the character and factor vectors (names and pace), we were unable to take the mean.
 
 ```{r eval=FALSE}
 
 as.numeric(positive_ac)
+as.numeric(names)
+as.numeric(pace)
 ```
 
-Using this function converts the True/False elements in the positive_ac vector into numbers 0 and 1( Zero for False, One for ). Thus it explains why we get a mean for the logical vector, even though the elements are not in fact numeric. 
+Using this function converts the True/False elements in the positive_ac vector into numbers 0 and 1( Zero for False, One for True). Thus it explains why we get a mean for the logical vector, even though the elements are not in fact numeric. On the other hand, error messages were shown when using the as.numeric function on the character and factor variables.
 
 
 Problem 2
@@ -56,14 +58,14 @@ nrow(penguins)
 ncol(penguins)
 ```
 
-The data gives descriptions of 344 different penguins using 8 variables. Each observation is assigned a species, sex, and the island the penguin is from. Moreover, the continuous variables of the data set measures the bill length, bill depth, and flipper length(in millimeters). The year variable I presume is the year the penguin's data was taken/marked.
+The data gives descriptions of 344 different penguins using 8 variables. Each observation is assigned a species, sex, and the island the penguin is from. Moreover, the continuous variables of the data set measures the bill length, bill depth, and flipper length(all in millimeters). The year variable I presume is the year the penguin's data was taken/marked.
 
 
 ```{r}
 mean(penguins$flipper_length_mm,na.rm=TRUE)
 ```
 
-After reviewing the dataset, there are missing values, particularly for observations 343 and 344. To calculate the mean flipper length of the penguins in the sample, we ommitted those two observations. After ommission, the mean flipper length is 200.9152 millimeters. 
+After reviewing the dataset, there are missing values, particularly for observations 343 and 344. To calculate the mean flipper length of the penguins in the sample, we omitted observations that had missing values for flipper length. After omission, the mean flipper length is 200.9152 millimeters. 
 
 
 ```{r}
@@ -72,6 +74,6 @@ ggplot(penguins, aes(x= bill_length_mm, y=flipper_length_mm, color=species)) + g
 
 A scatter plot was created comparing the bill length to the flipper length, and the colors of the points denote what species each penguin observation is. The key is given to the right of the generated scatter plot. The scatter plot reveals a fairly linear relationship between bill length and flipper length.
 
-```{r include==FALSE}
+```{r include=FALSE}
 ggsave("penguins.png",plot=last_plot())
 ```
